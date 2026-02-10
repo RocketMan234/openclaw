@@ -18,12 +18,12 @@ type CommandRegisterParams = {
   argv: string[];
 };
 
-export type CommandRegistration = {
+type CommandRegistration = {
   id: string;
   register: (params: CommandRegisterParams) => void;
 };
 
-export const commandRegistry: CommandRegistration[] = [
+const commandRegistry: CommandRegistration[] = [
   {
     id: "setup",
     register: ({ program }) => registerSetupCommand(program),
