@@ -5,7 +5,6 @@ import path from "node:path";
 import { resolveStateDir } from "../config/paths.js";
 import { routeLogsToStderr } from "../logging/console.js";
 import { pathExists } from "../utils.js";
-import { getSubCliEntries, registerSubCliByName } from "./program/register.subclis.js";
 
 const COMPLETION_SHELLS = ["zsh", "bash", "powershell", "fish"] as const;
 type CompletionShell = (typeof COMPLETION_SHELLS)[number];
@@ -239,6 +238,8 @@ export function registerCompletionCli(program: Command) {
       // Route logs to stderr so plugin loading messages do not corrupt
       // the completion script written to stdout.
       routeLogsToStderr();
+      const { getSubCliEntries, registerSubCliByName } =
+        await import("./program/register.subclis.js");
       const shell = options.shell ?? "zsh";
       // Eagerly register all subcommands to build the full tree
       const entries = getSubCliEntries();
