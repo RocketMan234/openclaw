@@ -83,7 +83,9 @@ describe("logger helpers", () => {
     expect(fs.existsSync(todayPath)).toBe(true);
     expect(fs.readFileSync(todayPath, "utf-8")).toContain("roll-me");
 
-    // Pruning is deferred to setImmediate; wait for it to run.
+    // Pruning is deferred to setImmediate inside buildLogger; await two
+    // immediates so the nested callback is guaranteed to have executed.
+    await new Promise((resolve) => setImmediate(resolve));
     await new Promise((resolve) => setImmediate(resolve));
     expect(fs.existsSync(oldPath)).toBe(false);
 
