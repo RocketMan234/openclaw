@@ -139,8 +139,10 @@ const { checkUpdateStatus, fetchNpmTagVersion, resolveNpmChannelTag } =
 const { runCommandWithTimeout } = await import("../process/exec.js");
 const { runDaemonRestart } = await import("./daemon-cli.js");
 const { defaultRuntime } = await import("../runtime.js");
-const { updateCommand, registerUpdateCli, updateStatusCommand, updateWizardCommand } =
-  await import("./update-cli.js");
+const { registerUpdateCli } = await import("./update-cli.js");
+const { updateCommand } = await import("./update-cli/update-command.js");
+const { updateStatusCommand } = await import("./update-cli/status.js");
+const { updateWizardCommand } = await import("./update-cli/wizard.js");
 
 describe("update-cli", () => {
   let fixtureRoot = "";

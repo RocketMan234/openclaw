@@ -75,7 +75,7 @@ vi.mock("../config/config.js", () => ({
 }));
 
 describe("nodes-cli coverage", () => {
-  let registerNodesCli: (program: Command) => void;
+  let registerNodesCli: (program: Command) => void | Promise<void>;
 
   beforeAll(async () => {
     ({ registerNodesCli } = await import("./nodes-cli.js"));
